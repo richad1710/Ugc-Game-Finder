@@ -15,5 +15,7 @@ pip install requests
 pip install rgbprint
 pip install os
 ```
+if it dind't work for you u installed python wrong or something,
 after install Editthiscookie On Chrome Web Store
 https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?
+click on the extension then it should have this
