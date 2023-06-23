@@ -19,7 +19,7 @@ if it dind't work for you u installed python wrong or something,
 after install Editthiscookie On Chrome Web Store
 https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg
 go to roblox and 
-click on the extension then it should have this
+click on the extension
 ![Cookie Editor](https://cdn.discordapp.com/attachments/1118550025719529543/1121845891578482798/image.png)
 
 you should have this
