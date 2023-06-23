@@ -1,8 +1,10 @@
 import requests
 from rgbprint import color, Color, gradient_print, gradient_scroll
+import os
+import json
 
-file = open('cookies.txt', 'r')
-observe = file.read()
+j = open('config.json')
+data = json.load(j)
 
 logo = ("""
   d8,                                          ,d8888b  d8,                d8b                 
@@ -20,10 +22,9 @@ d88' `?88P'`88b`?8888P'd88'     `?888P'     d88'      d88' d88'   88b`?88P'`88b`
 gradient_print(logo, start_color=(69, 140, 255), end_color=(135, 181, 255))
 gradient_print("What Is The Item Id?", start_color=(69, 140, 255), end_color=(135, 181, 255))
 ids = input(f"{Color((69, 140, 255))}>{Color.white} ")
-cookie = observe
 
 session = requests.Session()
-session.cookies[".ROBLOSECURITY"] = cookie
+session.cookies[".ROBLOSECURITY"] = (data)["account"].get("cookie")
 
 def rbx_request(method, url, **kwargs):
     request = session.request(method, url, **kwargs)
@@ -31,12 +32,20 @@ def rbx_request(method, url, **kwargs):
     if (method == "post") or (method == "put") or (method == "patch") or (method == "delete"):
         if "X-CSRF-TOKEN" in request.headers:
             session.headers["X-CSRF-TOKEN"] = request.headers["X-CSRF-TOKEN"]
-            if request.status_code == 403:  # Request failed, send it again
+            if request.status_code == 403:
                 request = session.request(method, url, **kwargs)
     return request
 
 
 req = rbx_request("GET", f"https://economy.roblox.com/v2/assets/{ids}/details")
+
+if req.status_code == 400:
+    print("Not a Valid Id")
+    os.system("pause")
+
+if (req.json())["SaleLocation"] is None or len((req.json())["SaleLocation"].get("UniverseIds", [])) == 0:
+    print("Put Ur Roblox Cookie Or This Item Doesn't Have An Id")
+    os.system("pause")
 
 universe_ids = (req.json())['SaleLocation'].get('UniverseIds', [])
 
@@ -46,8 +55,7 @@ game_list = []
 for current in (req2.json())["data"]:
     game_list.append(current['rootPlaceId'])
 
-
 req3 = rbx_request("GET", (f"https://www.roblox.com/games/{', https://www.roblox.com/games/'.join(str(id) for id in game_list)}"))
 print(str(req3.url))
 
-input("Press Enter To Exit ")
+os.system("pause")
