@@ -9,3 +9,11 @@ Install Python First
 If You Don't Know How To Do That
 Go To Here https://www.youtube.com/watch?v=YKSpANU8jPE
 Or Just Go To https://www.python.org/downloads/
+After Go To Command Prompts And Type These
+```python
+pip install requests 
+pip install rgbprint
+pip install os
+```
+after install Editthiscookie On Chrome Web Store
+https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?
