@@ -21,4 +21,7 @@ https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccc
 go to roblox and 
 click on the extension then it should have this
 ![Cookie Editor](https://cdn.discordapp.com/attachments/1118550025719529543/1121845891578482798/image.png)
-click on cookie editor\nye
+
+after go to roblox security and copy all of the text there
+
+then open config.json and put ur cookie and then enjoy!
