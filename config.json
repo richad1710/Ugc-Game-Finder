@@ -1,5 +1,8 @@
 {
     "account": {
-        "cookie": "your cookie goes here"
+        "cookie": "Roblox Cookie Here!"
+    },
+    "game": {
+        "auto-join": false
     }
 }
