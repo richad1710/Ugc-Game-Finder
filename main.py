@@ -1,8 +1,22 @@
-import os
-from rgbprint import gradient_print, color, Color
-import requests
-import webbrowser
-import json
+try:
+    try:
+        import requests
+        import os
+        from rgbprint import gradient_print, color, Color
+        import webbrowser
+        import json
+    except ModuleNotFoundError as errora:
+        import os
+        print(f'{errora} Installing Now')
+        os.system('pip install requests')
+        os.system('pip install rgbprint')
+        quit()
+except ModuleNotFoundError as error:
+    import os
+    print(f'{error} Installing Now')
+    os.system('pip install requests')
+    os.system('pip install rgbprint')
+    quit()
 
 j = open('config.json')
 data = json.load(j)
@@ -64,6 +78,6 @@ if data['game']['auto-join'] == True:
     webbrowser.open(f'roblox://experiences/start?placeId={",".join(map(str, game_list))}')
     print('Opened Browser')
 else:
-    print('Auto-Join Disabled')
+    print('Auto-join Disabled')
 
 os.system("pause")
