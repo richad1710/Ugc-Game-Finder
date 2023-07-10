@@ -1,6 +1,7 @@
-import requests
-from rgbprint import color, Color, gradient_print, gradient_scroll
 import os
+from rgbprint import gradient_print, color, Color
+import requests
+import webbrowser
 import json
 
 j = open('config.json')
@@ -24,7 +25,7 @@ gradient_print("What Is The Item Id?", start_color=(69, 140, 255), end_color=(13
 ids = input(f"{Color((69, 140, 255))}>{Color.white} ")
 
 session = requests.Session()
-session.cookies[".ROBLOSECURITY"] = (data)["account"].get("cookie")
+session.cookies[".ROBLOSECURITY"] = (data)["account"]['cookie']
 
 def rbx_request(method, url, **kwargs):
     request = session.request(method, url, **kwargs)
@@ -42,20 +43,27 @@ req = rbx_request("GET", f"https://economy.roblox.com/v2/assets/{ids}/details")
 if req.status_code == 400:
     print("Not a Valid Id")
     os.system("pause")
+    quit()
 
 if (req.json())["SaleLocation"] is None or len((req.json())["SaleLocation"].get("UniverseIds", [])) == 0:
     print("Put Ur Roblox Cookie Or This Item Doesn't Have An Id")
     os.system("pause")
+    quit()
 
 universe_ids = (req.json())['SaleLocation'].get('UniverseIds', [])
 
-req2 = rbx_request("GET", (f"https://games.roblox.com/v1/games?universeIds={','.join(str(ids) for ids in universe_ids)}"))
+req2 = rbx_request("GET", (f"https://games.roblox.com/v1/games?universeIds={','.join(map(str, universe_ids))}"))
 
 game_list = []
 for current in (req2.json())["data"]:
     game_list.append(current['rootPlaceId'])
 
-req3 = rbx_request("GET", (f"https://www.roblox.com/games/{', https://www.roblox.com/games/'.join(str(id) for id in game_list)}"))
+req3 = rbx_request("GET", (f"https://www.roblox.com/games/{','.join(map(str, game_list))}"))
 print(str(req3.url))
+if data['game']['auto-join'] == True:
+    webbrowser.open(f'roblox://experiences/start?placeId={",".join(map(str, game_list))}')
+    print('Opened Browser')
+else:
+    print('Auto-Join Disabled')
 
 os.system("pause")
