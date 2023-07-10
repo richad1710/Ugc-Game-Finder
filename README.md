@@ -13,7 +13,6 @@ After Go To Command Prompts And Type These
 ```python
 pip install requests 
 pip install rgbprint
-pip install os
 ```
 if it dind't work for you u installed python wrong or something,
 after install Editthiscookie On Chrome Web Store
