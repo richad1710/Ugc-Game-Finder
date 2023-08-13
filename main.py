@@ -67,14 +67,17 @@ d88' `?88P'`88b`?8888P'd88'     `?888P'     d88'      d88' d88'   88b`?88P'`88b`
         os.system("pause")
         quit()
 
-    universe_ids = (req.json())['SaleLocation'].get('UniverseIds')[0]
-    if (req.json())['SaleLocation'].get('UniverseIds')[1] in req.json()['SaleLocation']['UniverseIds']:
-        universe_ids = (req.json())['SaleLocation'].get('UniverseIds')[1]
+    universe_ids = (req.json())['SaleLocation'].get('UniverseIds', [])
+    for i in range(len(universe_ids)):
+        pass
+        if i == 1:
+            universe_ids = (req.json())['SaleLocation'].get('UniverseIds', [])[1]
+    print(universe_ids)
 
-    req2 = rbx_request("GET", (f"https://games.roblox.com/v1/games?universeIds={universe_ids}"))
+    req2 = rbx_request("GET", (f"https://games.roblox.com/v1/games?universeIds={', '.join(map(str, universe_ids))}"))
 
     game_list = []
-    for current in (req2.json())["data"]:
+    for current in (req2.json()).get("data"):
         game_list.append(current['rootPlaceId'])
 
     req3 = rbx_request("GET", (f"https://www.roblox.com/games/{','.join(map(str, game_list))}"))
